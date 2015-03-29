@@ -89,7 +89,7 @@ public class SplashScreenActivity extends ActionBarActivity {
 
     public void onContinue()
     {
-        Intent finished = new Intent(this, MainActivity.class);
+        Intent finished = new Intent(this, FindGarages.class);
         startActivity(finished);
         onDestroy();
     }
