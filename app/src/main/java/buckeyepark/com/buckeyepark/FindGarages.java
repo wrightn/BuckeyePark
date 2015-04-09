@@ -49,7 +49,7 @@ public class FindGarages extends Activity {
     private final String tag = "tagged point";
     ListView listview;
     ArrayList<Garages> garages;
-    private Location mLocation = new Location("Something");
+    private Location mLocation = new Location("Find Garages:");
     ProgressDialog mProgressDialog;
     SharedPreferences pref;
 
@@ -57,9 +57,18 @@ public class FindGarages extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.find_garage);
         pref = PreferenceManager.getDefaultSharedPreferences(this);
-
+        Log.d(tag, "create views");
         listview = (ListView)findViewById(R.id.findgaragelist);
         mActivityIndicator = (ProgressBar) findViewById(R.id.address_progress);
+        //set bogus location, will be updated later with correct location
+        mLocation.setLatitude(40);
+        mLocation.setLongitude(-83);
+        //ensure location services are turned on
+        if (Build.VERSION.SDK_INT >=
+                Build.VERSION_CODES.GINGERBREAD &&Geocoder.isPresent()) {
+
+            (new DoOnlineStuffTask(this)).execute(mLocation);
+        }
     }
 
     private class DoOnlineStuffTask extends AsyncTask<Location, Void, ArrayList<Garages>> {
@@ -94,6 +103,7 @@ public class FindGarages extends Activity {
 
             try {
                 garages = garageList;
+                Log.d(tag, "I will try to display the results now");
                 displayStationList(garages);
             } catch (NumberFormatException nfe) {
                 System.out.println("Could not parse " + nfe);
@@ -107,8 +117,10 @@ public class FindGarages extends Activity {
         ArrayList<String> prettyList = new ArrayList();
         for(Garages garage : garageList)
         {
+            Log.d(tag, "I am adding garages to the list");
             prettyList.add("Garage Name: " + garage.getName() + " Percentage Full: " + garage.getPercentage());
         }
+        Log.d(tag, "If there were garages to add I would have done so by now");
         ArrayAdapter<String> adapter;
         adapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_list_item_1, prettyList);

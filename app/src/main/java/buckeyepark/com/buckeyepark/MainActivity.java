@@ -4,14 +4,21 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.content.Intent;
+import android.util.Log;
+import android.view.View;
+import android.view.View.OnClickListener;
 
-
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends ActionBarActivity implements OnClickListener {
+    private final String tag = "tagged point";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Log.d(tag, "onCreate for main screen");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        View btnFindGarages = findViewById(R.id.buttonFindGarages);
+        btnFindGarages.setOnClickListener(this);
     }
 
 
@@ -35,5 +42,14 @@ public class MainActivity extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void onClick(View v) {
+        Log.d(tag, "on click for main screen");
+        switch (v.getId()) {
+            case R.id.buttonFindGarages:
+                startActivity(new Intent(this, FindGarages.class));
+                break;
+        }
     }
 }
