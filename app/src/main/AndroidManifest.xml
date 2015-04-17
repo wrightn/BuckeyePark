@@ -21,8 +21,12 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".FindGarages"
-            android:label="@string/title_activity_find_garages" >
+            android:name=".DisplayGarages"
+            android:label="@string/display_garages" >
+        </activity>
+        <activity
+            android:name=".DisplayGarageList"
+            android:label="@string/display_garage_list" >
         </activity>
     </application>
 

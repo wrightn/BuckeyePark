@@ -6,4 +6,6 @@
     <string name="action_settings">Settings</string>
     <string name="title_activity_splash_screen">SplashScreenActivity</string>
     <string name="title_activity_find_garages">FindGarages</string>
+    <string name="display_garages">Display Garages</string>
+    <string name="display_garage_list">Display Garage List</string>
 </resources>

@@ -48,7 +48,7 @@ public class MainActivity extends ActionBarActivity implements OnClickListener {
         Log.d(tag, "on click for main screen");
         switch (v.getId()) {
             case R.id.buttonFindGarages:
-                startActivity(new Intent(this, FindGarages.class));
+                startActivity(new Intent(this, DisplayGarages.class));
                 break;
         }
     }
