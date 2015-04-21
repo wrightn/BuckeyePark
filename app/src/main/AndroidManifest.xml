@@ -28,6 +28,10 @@
             android:name=".DisplayGarageList"
             android:label="@string/display_garage_list" >
         </activity>
+        <activity
+            android:name=".GarageWebView"
+            android:label="@string/garageWebView" >
+        </activity>
     </application>
 
     <uses-permission android:name="com.vogella.android.locationapi.maps.permission.MAPS_RECEIVE" />

@@ -8,4 +8,9 @@
     <string name="title_activity_find_garages">FindGarages</string>
     <string name="display_garages">Display Garages</string>
     <string name="display_garage_list">Display Garage List</string>
+    <string name="display_garage_info">Garage Info</string>
+    <string name="laneAvenue">328 W. Lane Ave.
+                                Access: OSU Permit and Visitors </string>
+    <string name="Garage_Info">Garage Info</string>
+    <string name="garageWebView">Garage Webview</string>
 </resources>

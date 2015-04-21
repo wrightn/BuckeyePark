@@ -8,8 +8,10 @@ import android.content.Intent;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -39,10 +41,27 @@ public class DisplayGarageList extends Activity {
             ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
                     android.R.layout.simple_list_item_1, prettyList);
             listview = (ListView) findViewById(R.id.display_garage_list);
+            listview.setOnItemClickListener(new ListClickHandler());
             listview.setAdapter(adapter);
         }
 
     }
+
+    public class ListClickHandler implements AdapterView.OnItemClickListener {
+
+        @Override
+        public void onItemClick(AdapterView<?> adapter, View view, int position, long arg3) {
+            // create intent to start another activity
+            Intent intent = new Intent(DisplayGarageList.this, GarageWebView.class);
+            /* add the selected text item to our intent. */
+            intent.putExtra("garage-num", position);
+            startActivity(intent);
+        }
+
+    }
+
+
+
     public String getGarageName(int counter){
         switch (counter) {
             case 1:

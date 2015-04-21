@@ -8,7 +8,7 @@ tools:context=".DisplayGarages"
     android:orientation="vertical">
 tools:ignore="MergeRootFrame">
 
-<WebView
+    <WebView
     android:id="@+id/display_garages"
     android:layout_width="match_parent"
     android:layout_height="match_parent" />
