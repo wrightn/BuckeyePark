@@ -19,6 +19,8 @@ import java.util.ArrayList;
  * Created by Owner on 4/16/2015.
  */
 public class DisplayGarageList extends Activity {
+    ArrayList<String> percentList;
+    ArrayList<String> nameList;
     ListView listview;
     private final String tag = "tagged point";
     @Override
@@ -26,13 +28,14 @@ public class DisplayGarageList extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.display_garage_list);
         Bundle b = getIntent().getExtras();
-        ArrayList<String> garageList = b.getStringArrayList("id");
+        percentList = b.getStringArrayList("percent");
+        nameList = b.getStringArrayList("name");
         // Display the results of the lookup.
         ArrayList<String> prettyList = new ArrayList();
-        int counter = 1;
-        for(String percent : garageList)
+        int counter = 0;
+        for(String percent : percentList)
         {
-            prettyList.add(getGarageName(counter) + ": " + percent + " full");
+            prettyList.add(nameList.get(counter) + ": " + percent + " full");
             counter++;
         }
         Log.d(tag, "If there were garages to add I would have done so by now");
@@ -54,52 +57,12 @@ public class DisplayGarageList extends Activity {
             // create intent to start another activity
             Intent intent = new Intent(DisplayGarageList.this, GarageWebView.class);
             /* add the selected text item to our intent. */
-            intent.putExtra("garage-num", position);
+            intent.putExtra("garage-name", nameList.get(position));
             startActivity(intent);
         }
 
     }
 
-
-
-    public String getGarageName(int counter){
-        switch (counter) {
-            case 1:
-                return "West Lane Avenue";
-            case 2:
-                return "Arps Hall";
-            case 3:
-                return "Tuttle Park Place";
-            case 4:
-                return "9th Avenue East";
-            case 5:
-                return "Neil Avenue";
-            case 6:
-                return "11th Avenue";
-            case 7:
-                return "South Gateway";
-            case 8:
-                return "Lane Avenue";
-            case 9:
-                return "Ohio Union North";
-            case 10:
-                return "North Cannon";
-            case 11:
-                return "Ohio Union South";
-            case 12:
-                return "12th Avenue";
-            case 13:
-                return "SafeAuto Hospital";
-            case 14:
-                return "South Cannon";
-            case 15:
-                return "Northwest";
-            case 16:
-                return "9th Avenue West";
-
-        }
-        return "";
-    }
     public DisplayGarageList() {
     }
 }

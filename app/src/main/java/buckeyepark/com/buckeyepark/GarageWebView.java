@@ -20,8 +20,8 @@ public class GarageWebView extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Bundle b = getIntent().getExtras();
-        int garageNum = b.getInt("garage-num");
-        String url = getGarageURL(garageNum);
+        String garageName = b.getString("garage-name");
+        String url = getGarageURL(garageName);
         getWindow().requestFeature(Window.FEATURE_NO_TITLE);
         mWebView = new WebView(this);
         mWebView.loadUrl(url);
@@ -45,57 +45,56 @@ public class GarageWebView extends Activity {
         return super.onKeyDown(keyCode, event);
     }
     
-    public String getGarageURL(int garageNum) {
-        switch (garageNum) {
-            case 0:
+    public String getGarageURL(String garageName) {
+        switch (garageName) {
+            case "West Lane Avenue":
                 //   "West Lane Avenue";
-               
                 return "http://osu.campusparc.com/osu/garages/west-lane";
-            case 1:
+            case "Arps Hall":
                 //  "Arps Hall";
-                return "" ;
-            case 2:
+                return "http://osu.campusparc.com/osu/garages/arps" ;
+            case "Tuttle Park Place":
                 //   "Tuttle Park Place";
-                return "" ;
-            case 3:
+                return "http://osu.campusparc.com/osu/garages/tuttle-park-place" ;
+            case "9th Avenue East":
                 //   "9th Avenue East";
-                return "";
-            case 4:
+                return "http://osu.campusparc.com/osu/garages/9th-avenue-east";
+            case "Neil Avenue":
                 //  "Neil Avenue";
-                return "";
-            case 5:
+                return "http://osu.campusparc.com/osu/garages/neil-avenue";
+            case "11th Avenue":
                 //  "11th Avenue";
-                return "";
-            case 6:
+                return "http://osu.campusparc.com/osu/garages/11th-avenue";
+            case "South Gateway":
                 //  "South Gateway";
-                return "";
-            case 7:
+                return "http://osu.campusparc.com/osu/garages/south-campus-gateway";
+            case "Lane Avenue":
                 //  "Lane Avenue";
-                return "";
-            case 8:
+                return "http://osu.campusparc.com/osu/garages/lane-avenue";
+            case "Ohio Union North":
                 //  "Ohio Union North";
-                return "";
-            case 9:
+                return "http://osu.campusparc.com/osu/garages/ohio-union-north";
+            case "North Cannon":
                 // "North Cannon";
-                return "";
-            case 10:
+                return "http://osu.campusparc.com/osu/garages/north-cannon";
+            case "Ohio Union South":
                 //  "Ohio Union South";
-                return "";
-            case 11:
+                return "http://osu.campusparc.com/osu/garages/ohio-union-south";
+            case "12th Avenue":
                 //"12th Avenue";
-                return "";
-            case 12:
+                return "http://osu.campusparc.com/osu/garages/12th-avenue";
+            case "SafeAuto Hospital":
                 // "SafeAuto Hospital";
-                return "";
-            case 13:
+                return "http://osu.campusparc.com/osu/garages/safeauto";
+            case "South Cannon":
                 // "South Cannon";
-                return "";
-            case 14:
+                return "http://osu.campusparc.com/osu/garages/south-cannon";
+            case "Northwest":
                 //  "Northwest";
-                return "";
-            case 15:
+                return "http://osu.campusparc.com/osu/garages/northwest";
+            case "9th Avenue West":
                 // "9th Avenue West";
-                return "";
+                return "http://osu.campusparc.com/osu/garages/9th-avenue-west";
 
         }
         return "";

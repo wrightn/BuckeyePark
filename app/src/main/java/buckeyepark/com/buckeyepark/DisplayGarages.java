@@ -27,6 +27,7 @@ import android.os.Handler;
 import android.os.Looper;
 import android.os.UserHandle;
 import android.support.annotation.Nullable;
+import android.util.ArrayMap;
 import android.util.Log;
 import android.view.Display;
 import android.view.View;
@@ -55,6 +56,7 @@ public class DisplayGarages extends Activity {
     ProgressDialog mProgressDialog;
     private final String tag = "tagged point";
     ArrayList<String> percentList = new ArrayList();
+    ArrayList<String> nameList = new ArrayList();
     int counter = 1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,8 +71,8 @@ public class DisplayGarages extends Activity {
         /* An instance of this class will be registered as a JavaScript interface */
         class MyJavaScriptInterface {
             @JavascriptInterface
-            public void showHTML(String percent) {
-                Log.d(tag, "I am adding garages to the list");
+            public void addPercent(String percent) {
+                Log.d(tag, "I am adding garage percents to the list");
                 percentList.add(percent);
                 counter++;
                 if(counter>16)
@@ -78,13 +80,19 @@ public class DisplayGarages extends Activity {
                     timeToEnd();
                 }
             }
+            @JavascriptInterface
+            public void addName(String name) {
+                Log.d(tag, "I am adding garage name to the list");
+                String[] vars = name.split("[<>]");
+                nameList.add(vars[2]);
+            }
 
             public void timeToEnd()
             {
                 runOnUiThread(new Runnable() {
 
                     public void run() {
-                        displayStationList(percentList);
+                        displayStationList(percentList, nameList);
                     }
                 });
 
@@ -97,28 +105,59 @@ public class DisplayGarages extends Activity {
         webview.addJavascriptInterface(new MyJavaScriptInterface(), "HTMLOUT");
         webview.removeAllViews();
         webview.setWebViewClient(mClient);
-        webview.loadUrl("http://osu.campusparc.com");
+        webview.loadUrl("http://osu.campusparc.com/");
     }
 
     private WebViewClient mClient = new WebViewClient(){
         @Override
         public void onPageFinished(WebView view, String url) {
-            view.loadUrl("javascript:window.HTMLOUT.showHTML( document.getElementsByClassName('graphDataCellPercentFullAlt')[0].innerHTML );");
-            view.loadUrl("javascript:window.HTMLOUT.showHTML( document.getElementsByClassName('graphDataCellPercentFull')[0].innerHTML );");
-            view.loadUrl("javascript:window.HTMLOUT.showHTML( document.getElementsByClassName('graphDataCellPercentFullAlt')[1].innerHTML );");
-            view.loadUrl("javascript:window.HTMLOUT.showHTML( document.getElementsByClassName('graphDataCellPercentFull')[1].innerHTML );");
-            view.loadUrl("javascript:window.HTMLOUT.showHTML( document.getElementsByClassName('graphDataCellPercentFullAlt')[2].innerHTML );");
-            view.loadUrl("javascript:window.HTMLOUT.showHTML( document.getElementsByClassName('graphDataCellPercentFull')[2].innerHTML );");
-            view.loadUrl("javascript:window.HTMLOUT.showHTML( document.getElementsByClassName('graphDataCellPercentFullAlt')[3].innerHTML );");
-            view.loadUrl("javascript:window.HTMLOUT.showHTML( document.getElementsByClassName('graphDataCellPercentFull')[3].innerHTML );");
-            view.loadUrl("javascript:window.HTMLOUT.showHTML( document.getElementsByClassName('graphDataCellPercentFullAlt')[4].innerHTML );");
-            view.loadUrl("javascript:window.HTMLOUT.showHTML( document.getElementsByClassName('graphDataCellPercentFull')[4].innerHTML );");
-            view.loadUrl("javascript:window.HTMLOUT.showHTML( document.getElementsByClassName('graphDataCellPercentFullAlt')[5].innerHTML );");
-            view.loadUrl("javascript:window.HTMLOUT.showHTML( document.getElementsByClassName('graphDataCellPercentFull')[5].innerHTML );");
-            view.loadUrl("javascript:window.HTMLOUT.showHTML( document.getElementsByClassName('graphDataCellPercentFullAlt')[6].innerHTML );");
-            view.loadUrl("javascript:window.HTMLOUT.showHTML( document.getElementsByClassName('graphDataCellPercentFull')[6].innerHTML );");
-            view.loadUrl("javascript:window.HTMLOUT.showHTML( document.getElementsByClassName('graphDataCellPercentFullAlt')[7].innerHTML );");
-            view.loadUrl("javascript:window.HTMLOUT.showHTML( document.getElementsByClassName('graphDataCellPercentFull')[7].innerHTML );");
+            view.loadUrl("javascript:window.HTMLOUT.addName( document.getElementsByClassName('graphDataCellGarageNameAlt')[0].innerHTML );");
+            view.loadUrl("javascript:window.HTMLOUT.addPercent( document.getElementsByClassName('graphDataCellPercentFullAlt')[0].innerHTML );");
+
+            view.loadUrl("javascript:window.HTMLOUT.addName( document.getElementsByClassName('graphDataCellGarageName')[0].innerHTML );");
+            view.loadUrl("javascript:window.HTMLOUT.addPercent( document.getElementsByClassName('graphDataCellPercentFull')[0].innerHTML );");
+
+            view.loadUrl("javascript:window.HTMLOUT.addName( document.getElementsByClassName('graphDataCellGarageNameAlt')[1].innerHTML );");
+            view.loadUrl("javascript:window.HTMLOUT.addPercent( document.getElementsByClassName('graphDataCellPercentFullAlt')[1].innerHTML );");
+
+            view.loadUrl("javascript:window.HTMLOUT.addName( document.getElementsByClassName('graphDataCellGarageName')[1].innerHTML );");
+            view.loadUrl("javascript:window.HTMLOUT.addPercent( document.getElementsByClassName('graphDataCellPercentFull')[1].innerHTML );");
+
+            view.loadUrl("javascript:window.HTMLOUT.addName( document.getElementsByClassName('graphDataCellGarageNameAlt')[2].innerHTML );");
+            view.loadUrl("javascript:window.HTMLOUT.addPercent( document.getElementsByClassName('graphDataCellPercentFullAlt')[2].innerHTML );");
+
+            view.loadUrl("javascript:window.HTMLOUT.addName( document.getElementsByClassName('graphDataCellGarageName')[2].innerHTML );");
+            view.loadUrl("javascript:window.HTMLOUT.addPercent( document.getElementsByClassName('graphDataCellPercentFull')[2].innerHTML );");
+
+            view.loadUrl("javascript:window.HTMLOUT.addName( document.getElementsByClassName('graphDataCellGarageNameAlt')[3].innerHTML );");
+            view.loadUrl("javascript:window.HTMLOUT.addPercent( document.getElementsByClassName('graphDataCellPercentFullAlt')[3].innerHTML );");
+
+            view.loadUrl("javascript:window.HTMLOUT.addName( document.getElementsByClassName('graphDataCellGarageName')[3].innerHTML );");
+            view.loadUrl("javascript:window.HTMLOUT.addPercent( document.getElementsByClassName('graphDataCellPercentFull')[3].innerHTML );");
+
+            view.loadUrl("javascript:window.HTMLOUT.addName( document.getElementsByClassName('graphDataCellGarageNameAlt')[4].innerHTML );");
+            view.loadUrl("javascript:window.HTMLOUT.addPercent( document.getElementsByClassName('graphDataCellPercentFullAlt')[4].innerHTML );");
+
+            view.loadUrl("javascript:window.HTMLOUT.addName( document.getElementsByClassName('graphDataCellGarageName')[4].innerHTML );");
+            view.loadUrl("javascript:window.HTMLOUT.addPercent( document.getElementsByClassName('graphDataCellPercentFull')[4].innerHTML );");
+
+            view.loadUrl("javascript:window.HTMLOUT.addName( document.getElementsByClassName('graphDataCellGarageNameAlt')[5].innerHTML );");
+            view.loadUrl("javascript:window.HTMLOUT.addPercent( document.getElementsByClassName('graphDataCellPercentFullAlt')[5].innerHTML );");
+
+            view.loadUrl("javascript:window.HTMLOUT.addName( document.getElementsByClassName('graphDataCellGarageName')[5].innerHTML );");
+            view.loadUrl("javascript:window.HTMLOUT.addPercent( document.getElementsByClassName('graphDataCellPercentFull')[5].innerHTML );");
+
+            view.loadUrl("javascript:window.HTMLOUT.addName( document.getElementsByClassName('graphDataCellGarageNameAlt')[6].innerHTML );");
+            view.loadUrl("javascript:window.HTMLOUT.addPercent( document.getElementsByClassName('graphDataCellPercentFullAlt')[6].innerHTML );");
+
+            view.loadUrl("javascript:window.HTMLOUT.addName( document.getElementsByClassName('graphDataCellGarageName')[6].innerHTML );");
+            view.loadUrl("javascript:window.HTMLOUT.addPercent( document.getElementsByClassName('graphDataCellPercentFull')[6].innerHTML );");
+
+            view.loadUrl("javascript:window.HTMLOUT.addName( document.getElementsByClassName('graphDataCellGarageNameAlt')[7].innerHTML );");
+            view.loadUrl("javascript:window.HTMLOUT.addPercent( document.getElementsByClassName('graphDataCellPercentFullAlt')[7].innerHTML );");
+
+            view.loadUrl("javascript:window.HTMLOUT.addName( document.getElementsByClassName('graphDataCellGarageName')[7].innerHTML );");
+            view.loadUrl("javascript:window.HTMLOUT.addPercent( document.getElementsByClassName('graphDataCellPercentFull')[7].innerHTML );");
         }
 
         @Override
@@ -128,15 +167,14 @@ public class DisplayGarages extends Activity {
         }
     };
 
-    public void displayStationList(ArrayList<String> garageList)
+    public void displayStationList(ArrayList<String> percentList, ArrayList<String> nameList)
     {
        // mActivityIndicator.setVisibility(View.GONE);
        // mProgressDialog.dismiss();
 
         Intent i = new Intent(this, DisplayGarageList.class);
-        i.putExtra("id", garageList);
+        i.putExtra("percent", percentList);
+        i.putExtra("name", nameList);
         startActivity(i);
-
-
     }
 }
